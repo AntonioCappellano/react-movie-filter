@@ -13,17 +13,17 @@ export default function App() {
   // Setto valore iniziale
   const [genre, setGenre] = useState("");
   // mostro tutto l'array
-  const [result, setResult] = useState(initialFilm);
-
-  const [filterFilm, setFilterFilm] = useState(result);
+  const [filterFilm, setFilterFilm] = useState(initialFilm);
 
   useEffect(() => {
     // SE l'opzione tutti viene selezionato allora mostra tutti i film
-    if (genre === "Tutti") {
-      setResult(initialFilm);
+    if (genre === "") {
+      setFilterFilm(initialFilm);
     } else {
       // altrimenti mostra i film selezionati (.filter crea un nuovo array visualizzando solo gli elementi interessati )
-      const updatedFilterFilm = result.filter((film) => film.genre === genre);
+      const updatedFilterFilm = initialFilm.filter(
+        (film) => film.genre === genre,
+      );
 
       setFilterFilm(updatedFilterFilm);
     }
