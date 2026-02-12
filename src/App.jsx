@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const initialFilm = [
   { title: "Inception", genre: "Fantascienza" },
@@ -12,6 +12,23 @@ const initialFilm = [
 export default function App() {
   // Setto valore iniziale
   const [genre, setGenre] = useState("");
+  // mostro tutto l'array
+  const [result, setResult] = useState(initialFilm);
+
+  const [filterFilm, setFilterFilm] = useState(result);
+
+  useEffect(() => {
+    // SE l'opzione tutti viene selezionato allora mostra tutti i film
+    if (genre === "Tutti") {
+      setResult(initialFilm);
+    } else {
+      // altrimenti mostra i film selezionati (.filter crea un nuovo array visualizzando solo gli elementi interessati )
+      const updatedFilterFilm = result.filter((film) => film.genre === genre);
+
+      setFilterFilm(updatedFilterFilm);
+    }
+    // useEffect osserva questa variabile
+  }, [genre]);
 
   return (
     <div>
@@ -27,7 +44,7 @@ export default function App() {
         </select>
       </div>
       <ul>
-        {initialFilm.map((film, index) => (
+        {filterFilm.map((film, index) => (
           <li key={index}>
             <h4>{film.title}</h4>
             <h6>{film.genre}</h6>
