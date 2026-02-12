@@ -26,7 +26,14 @@ export default function App() {
           <option value="Azione">Azione</option>
         </select>
       </div>
-      <ul></ul>
+      <ul>
+        {initialFilm.map((film, index) => (
+          <li key={index}>
+            <h4>{film.title}</h4>
+            <h6>{film.genre}</h6>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
